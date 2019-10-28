@@ -188,14 +188,18 @@ host wants use a different directory you will need to change *storage_dir* for
 that host. Here, 6 queues are requested with msg sizes of 8 to 1024 bytes.
 
 __Start the daemon__
+
 *./lucidd -c /home/kislayakumar/queues/lucid.xml -l /home/kislayakumar/queues/log
                                            *-p /home/kislayakumar/queues/pidfile*
                                            
 Log file could be omitted if you are not debugging the daemon.
 
 __Stop the daemon__
+
 kill -TERM ``cat /home/kislayakumar/queues/pidfile``
+
 __Read Write msgs with client apps mqread and mqwrite__
+
 *cd clientlib/*
 
 *./mqwrite 3 11 8 /home/kislayakumar/queues testq1*
@@ -208,6 +212,7 @@ Read them with the following on any server:
 *./mqread 8 /home/kislayakumar/queues testq1*
 
 __Print queue metadata for any existing queue__
+
 *./lucidctl -p /home/kislayakumar/queues -n testq1*
 
 ### Bug Report and Help
