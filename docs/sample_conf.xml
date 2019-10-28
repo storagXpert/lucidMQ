@@ -1,0 +1,15 @@
+<lucid>
+    <storage_dir>/home/kislayakumar/queues</storage_dir>
+    <local_member>192.168.100.1</local_member>
+    <remote_member>192.168.100.183</remote_member>
+    <remote_member>192.168.100.138</remote_member>
+    <remote_member>192.168.100.201</remote_member>
+
+    <queue name="testq1" msgsize="8"> </queue>
+    <queue name="testq2" msgsize="16"> </queue>
+    <queue name="testq3" msgsize="32"> </queue>
+    <queue name="testq4" msgsize="64"> </queue>
+    <queue name="testq5" msgsize="512"> </queue>
+    <queue name="testq6" msgsize="1024"> </queue>
+</lucid>
+
