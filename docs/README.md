@@ -104,12 +104,12 @@ SIGTERM so that only daemon receives it. Daemon requests exit upon
 receiving these signals. Receiver unblocks after every RECVER_TIMEOUT_MS to
 check for such request from daemon for exit.
 
-####lucidctl tool
+#### lucidctl tool
 this tool is used for dumping any queue's on-disk metadata for live
 queue information. Primarily meant for debugging and validation.
 *Refer to lucidctl.c for finer details*
 
-####Synchronization constructs
+#### Synchronization constructs
 One pthread condition variable is used by daemon for waking up sender from timed
 wait if necessary. A pthread mutex is provided by daemon for client use only.
 Since the mutex resides in queue metadata which is mmaped by all clients it
@@ -125,13 +125,13 @@ schedule page flush rather than waiting for sync to return. A trade off between
 absolute persitence guarantee and performance. Same logic holds for daemon's
 receiver thread when a msg from remote host is received.
 
-####Client library
+#### Client library
 File based messaging allows for fast message filtering in client library.
 Messages could be timestamped upon generation. While reading, they could be
 sorted to enable time ordered delivery.
 Filters could be implemented for specific use cases too.
 
-####Deployment
+#### Deployment
 Code is targeted for linux servers not open group standard.
 For example, gettimeofday is used freely which linux optimizes via VDSO.
 Also, on UNIX systems, mmap API/behaviour might be different.
@@ -139,7 +139,7 @@ Use of Atomic constructs require C11 compliant compiler.
 lucidMQ network communication works in network byte order (big endian).
 So its independent of server hardware.
 
-###Build and Usage
+### Build and Usage
 __Build lucidMQ daemon :__
 install libxml-2.0 library if its not already there.
 run *pkg-config --cflags libxml-2.0* to get include path
@@ -154,13 +154,13 @@ __Build client applications mqread and mqwrite__
 *gcc -o mqwrite mqwrite.c lucidmq.c -pthread*
 __Setup configuration file___
 Here's a sample configuration file  lucid.xml:
+```
 <lucid>
     <storage_dir>/home/kislayakumar/queues</storage_dir>
     <local_member>192.168.100.1</local_member>
     <remote_member>192.168.100.183</remote_member>
     <remote_member>192.168.100.138</remote_member>
     <remote_member>192.168.100.201</remote_member>
-
     <queue name="testq1" msgsize="8"> </queue>
     <queue name="testq2" msgsize="16"> </queue>
     <queue name="testq3" msgsize="32"> </queue>
@@ -168,6 +168,7 @@ Here's a sample configuration file  lucid.xml:
     <queue name="testq5" msgsize="512"> </queue>
     <queue name="testq6" msgsize="1024"> </queue>
 </lucid>
+```
 All queues will be created in */home/kislayakumar/queues*
 For each server host in the cluster set *local_member* to the host's ip. If each
 host wants use a different directory you will need to change *storage_dir* for
@@ -177,7 +178,7 @@ __Start the daemon__
                                            *-p /home/kislayakumar/queues/pidfile*
 Log file could be omitted if you are not debugging the daemon.
 __Stop the daemon__
-kill -TERM `cat /home/kislayakumar/queues/pidfile`
+kill -TERM ``cat /home/kislayakumar/queues/pidfile``
 __Read Write msgs with client apps mqread and mqwrite__
 *cd clientlib/*
 *./mqwrite 3 11 8 /home/kislayakumar/queues testq1*
