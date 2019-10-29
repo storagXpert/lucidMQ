@@ -156,11 +156,11 @@ __Build lucidctl tool :__
 
 __Build client applications mqread and mqwrite__
 
-`cd clientlib/
+`cd clientlib/`
 
-gcc -o mqread mqread.c lucidmq.c -pthread
+`gcc -o mqread mqread.c lucidmq.c -pthread`
 
-gcc -o mqwrite mqwrite.c lucidmq.c -pthread`
+`gcc -o mqwrite mqwrite.c lucidmq.c -pthread`
 
 __Setup configuration file___
 Here's a sample configuration file  lucid.xml:
@@ -198,9 +198,9 @@ __Stop the daemon__
 
 __Read Write msgs with client apps mqread and mqwrite__
 
-`cd clientlib/
+`cd clientlib/`
 
-./mqwrite 3 11 8 /home/kislayakumar/queues testq1`
+`./mqwrite 3 11 8 /home/kislayakumar/queues testq1`
 
 This will write 3 msgs with byte value '11' repeated 8 times into testq1.
 8 here is the msg queue size so 11 fills up 8 bytes in the buffer.
