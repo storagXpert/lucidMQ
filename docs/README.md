@@ -141,18 +141,25 @@ So its independent of server hardware.
 
 ### Build and Usage
 __Build lucidMQ daemon :__
+
 install libxml-2.0 library if its not already there.
 
 run `pkg-config --cflags libxml-2.0` to get include path
+
 run `pkg-config --libs libxml-2.0` to get ld path
+
 `gcc -o lucidd util.c daemon.c initconf.c sender.c receiver.c  xmlconf.c -I /usr/include/libxml2/ -lxml2 -pthread`
                                
 __Build lucidctl tool :__
+
 `gcc -o lucidctl lucidctl.c`
 
 __Build client applications mqread and mqwrite__
+
 `cd clientlib/
+
 gcc -o mqread mqread.c lucidmq.c -pthread
+
 gcc -o mqwrite mqwrite.c lucidmq.c -pthread`
 
 __Setup configuration file___
@@ -180,25 +187,33 @@ host wants use a different directory you will need to change *storage_dir* for
 that host. Here, 6 queues are requested with msg sizes of 8 to 1024 bytes.
 
 __Start the daemon__
-`./lucidd -c /home/kislayakumar/queues/lucid.xml -l /home/kislayakumar/queues/log -p /home/kislayakumar/queues/pidfile`                                         
+
+`./lucidd -c /home/kislayakumar/queues/lucid.xml -l /home/kislayakumar/queues/log -p /home/kislayakumar/queues/pidfile`  
+
 Log file could be omitted if you are not debugging the daemon.
 
 __Stop the daemon__
+
 ``kill -TERM `cat /home/kislayakumar/queues/pidfile ``
 
 __Read Write msgs with client apps mqread and mqwrite__
+
 `cd clientlib/
+
 ./mqwrite 3 11 8 /home/kislayakumar/queues testq1`
 
 This will write 3 msgs with byte value '11' repeated 8 times into testq1.
 8 here is the msg queue size so 11 fills up 8 bytes in the buffer.
 These 3 msgs should become available on all remote servers immediately.
 Read them with the following on any server:
+
 `./mqread 8 /home/kislayakumar/queues testq1`
 
 __Print queue metadata for any existing queue__
+
 `./lucidctl -p /home/kislayakumar/queues -n testq1`
 
 ### Bug Report and Help
 Feel free to drop an email in case of issues or interesting ideas around this
-project. __e-mail__ : storagxpert@gmail.com
+project.
+__e-mail__ : storagxpert@gmail.com
