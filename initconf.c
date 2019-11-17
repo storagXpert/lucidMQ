@@ -121,6 +121,11 @@ init_qmeta_files(struct lucid_conf *conf) {
     pthread_mutexattr_t attrs;
     int qmeta_len = sizeof(*qmeta) +
                       sizeof(struct remote_partition) * conf->remote_mem_cnt;
+    // attempt to create the top level directory if it does not exist
+    if(mkdir(conf->storage_dir, 0755) && errno != EEXIST) {
+        log_mq("queue:directory(err %d, %d)\n", QDIR_CREAT_ERR, errno);
+        return QDIR_CREAT_ERR;
+    }
     qmeta = (struct queue_metadata *)malloc(qmeta_len);
     if (!qmeta) {
         log_mq("controller:file(err %d)\n", MEM_FAIL);

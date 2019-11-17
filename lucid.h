@@ -190,7 +190,8 @@ typedef enum {
     CTRL_MFILE_ERR     = -119,
     MEM_FAIL           = -120,
     MUTEX_FAIL         = -121,
-    MSGACKSEQ_ERR      = -122
+    MSGACKSEQ_ERR      = -122,
+    QDIR_CREAT_ERR     = -123
 } errors;
 
 // function declarations : util.c
