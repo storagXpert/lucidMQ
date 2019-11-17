@@ -227,8 +227,7 @@ lmq_send (struct lmq_msgq *q, const void *msg, unsigned int msglen) {
     }
     ret = pthread_mutex_lock(q->cmeta->write_lock);
     if (ret == EOWNERDEAD) {
-        pthread_mutex_consistent(q->cmeta->write_lock);
-        ret = pthread_mutex_lock(q->cmeta->write_lock);
+        ret = pthread_mutex_consistent(q->cmeta->write_lock);
     }
     if (ret) {
         printf("send : lock err(%d)\n", ret);
