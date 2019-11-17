@@ -141,26 +141,15 @@ So its independent of server hardware.
 
 ### Build and Usage
 __Build lucidMQ daemon :__
-
-install libxml-2.0 library if its not already there.
-
-run `pkg-config --cflags libxml-2.0` to get include path
-
-run `pkg-config --libs libxml-2.0` to get ld path
-
-`gcc -o lucidd util.c daemon.c initconf.c sender.c receiver.c  xmlconf.c -I /usr/include/libxml2/ -lxml2 -pthread`
-                               
-__Build lucidctl tool :__
-
-`gcc -o lucidctl lucidctl.c`
-
-__Build client applications mqread and mqwrite__
-
-`cd clientlib/`
-
-`gcc -o mqread mqread.c lucidmq.c -pthread`
-
-`gcc -o mqwrite mqwrite.c lucidmq.c -pthread`
+ - cmake with minimum version 2.8.8 can be used to build and install the artefacts.
+ - Steps are as below with root source directory of lucidMQ as current working directory:
+ 1. mkdir build
+ 2. cd build
+ 3. cmake ..
+ 4. make
+ 5. make install
+ 
+This will create the daemon **lucidd**, the tool **lucidctl** and the client applications **mqread** & **mqwrite** in build/**bin** and client library in build/**lib** directories by default. To place them in /usr/* add -DCMAKE_INSTALL_PREFIX=/usr to step 3, sudo might be necessary in step #5. Also, to make a debug build add -DCMAKE_BUILD_TYPE=Debug to step 3.
 
 __Setup configuration file__
 Here's a sample configuration file  lucid.xml:
