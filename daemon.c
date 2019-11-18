@@ -37,7 +37,7 @@ daemonize(char * pid_file) {
 		exit(EXIT_SUCCESS);
 	umask(0);
 	chdir("/");
-	for (fd = sysconf(_SC_OPEN_MAX); fd > 0; fd--)
+	for (fd = sysconf(_SC_OPEN_MAX)-1; fd >= 0; fd--)
 		close(fd);
 	stdin = fopen("/dev/null", "r");
 	stdout = fopen("/dev/null", "w+");
